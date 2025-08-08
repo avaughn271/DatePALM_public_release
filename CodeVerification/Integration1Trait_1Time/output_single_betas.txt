@@ -1,0 +1,2 @@
+selection_gradient	se	z	delta	delta_se	delta_z
+-0.0746	0.0059	-12.7277	-1	-1	-1

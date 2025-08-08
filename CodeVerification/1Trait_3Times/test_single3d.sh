@@ -1,0 +1,1 @@
+python3.10 ~/desktop/palm/palm-master/palm.py   --metadata test_single3d.tsv   --maxp 1e-8     --B 100000 --snpDir TestSNPs3d --out output_single3d

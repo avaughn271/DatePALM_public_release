@@ -1,0 +1,52 @@
+
+still need to get fitting to work with normal distribution. including multiple time periods. CEHCK S VS. 2S
+	looks good but still need to verify!
+
+also output p-values based on the z-scores, it is a 2 sided p value. should check z-scores with p values in main palm text.
+
+
+winner's curse and p-value cutoff??
+	think about how genetic architecture chagnes through time. see what they did in the ms paper? How far back in time can we go and hwo does this fail?
+
+DONE:
+
+check whether p-value cutoff and current procedure give same answers or different ones.
+	both p-value cutoffs mean the same thing, so just pick p-val for simplicity.
+
+Keep the boostrap for estimating the standard errors, but keep in mind that it will perform very poorly when there are few numbers of SNPs contributing to a trait.
+
+For multiple traits, keep any snp for which at least one p-value is below the threshhold. For marginal, still include all SNPs with it. Don't refilter SNPs. Even when many snps have p-val above 5 x 10^-8, this is okay.
+
+
+Betas are allele after last colon. Results are on derived allele.
+
+stretch and shift marginal so that it is a circle and then plot the joint over it. Only need to set the absolute size. bullseye plot. Should maybe edit so that. Maybe re-choose contours so that
+equal area is inside each of the corresponding areas.
+
+
+check that alphabetical ordering of traits means all statistics are generated okay in the proper order. Yup!!!
+
+check that clues-like thing gives the correct estimates - yes correct for 1 time period, 1 selection coefficient.
+
+add back the haplotype emissions to both clues2 and palm
+
+
+switch to fit normal distribution
+
+
+changed closed form to BFGS but still need to check convergence criteria, convergence based on relative tolerance.
+
+For 1 trait, also compute whether difference between gradients in adjacent time periods are significantly different from 0.
+
+Think about what to plot? conditional on mle at all other positions.
+
+For 2 traits, also measure whether R is different between epochs and whether joint selection gradient are significantly from each other
+
+
+Incorporate standard errors into beta values.
+	check it works for 1d - positive standard errors - works for 1d, 1 trait. set bounds of integration and also number of quadrature points.
+		need to check for additional 3 cases as well as checking original stays the same.
+
+	check it works for standard joint selection inference for classic test.
+
+	check it works for 2d - positive standard errors

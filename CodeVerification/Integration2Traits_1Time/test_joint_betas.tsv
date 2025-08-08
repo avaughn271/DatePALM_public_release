@@ -1,0 +1,3 @@
+		variant	derived_allele	minor_allele	minor_AF	beta@MENOPAUSE_AGE	se@MENOPAUSE_AGE	pval@MENOPAUSE_AGE	beta@ProstateCancer	se@ProstateCancer	pval@ProstateCancer
+1	1:10:A:T		T	T	-1	-0.1	0.25	1e-10	0.01	0.1	1e-10
+2	1:20:C:T		T	T	-1	-0.15	0.5	1e-10	-0.14	0.3	1.0
