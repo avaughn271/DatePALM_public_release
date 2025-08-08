@@ -1,0 +1,2 @@
+sgrad_mle	sgrad_se	sgrad_z
+0.0108	0.0003	35.5767

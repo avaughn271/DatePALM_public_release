@@ -1,0 +1,60 @@
+// Keywords: quantitative trait
+initialize() {
+defineConstant("h2", 0.25);  //1:  heritability
+	initializeMutationRate(1.25e-8);
+	initializeMutationType("m1", 0.5, "f", 0.0);   
+	initializeMutationType("m2", 0.5, "n", 0.0, 0.15);  // 2: effect sizes for QTLs. Mean 0 and standard deviation of 0.15.
+	m2.convertToSubstitution = F;
+	initializeGenomicElementType("g1", c(m1, m2), c(1.0, 0.01));  //3: m2 occurs 1/100 of the time of m1
+	initializeGenomicElement(g1, 0, 2500000-1); //4: length.
+defineConstant("C", 250);  // number of indepedent regions.
+
+pos = 0;
+	q = NULL;
+	
+	for (i in 1:(C-1) )
+	{
+ 		pos = pos + 10000;
+ 		q = c(q, pos-1, pos);
+	}
+	 		q = c(q, 2500000);
+
+		defineConstant("Q", q);     // remember our QTL positions
+	// we want the QTLs to be unlinked; build a recombination map for that
+	rates = c(rep(c(1e-8,1e-2), C-1), 1e-8);
+	ends = (repEach(Q , 1) );
+	initializeRecombinationRate(rates, ends);
+	
+	
+}
+mutationEffect(m2) { return 1.0; }
+1 early() {
+	sim.addSubpop("p1", 50000);
+	cat("Phenotypes: 0");
+}
+1: late() {
+	inds = sim.subpopulations.individuals;
+	additive = inds.sumOfMutationsOfType(m2);
+	
+	// model environmental variance, according to the target heritability
+	V_A = sd(additive)^2;
+	V_E = (V_A - h2 * V_A) / h2;    // from h2 == V_A / (V_A + V_E)
+	env = rnorm(size(inds), 0.0, sqrt(V_E));
+
+	phenotypes = additive + env;
+	
+	inds.fitnessScaling = 1.0 + phenotypes * 0.12;   //5: fitness scaling.
+	inds.tagF = phenotypes;
+	
+	if ( (5000 - sim.cycle)  < 699 ) 
+         p1.outputSample(2); 
+}
+5000 late() {
+	m2muts = sim.mutationsOfType(m2);
+	freqs = sim.mutationFrequencies(NULL, m2muts);
+	effects = m2muts.selectionCoeff;
+	catn();
+	sim.outputFull();
+}
+
+//13.6 A variety of fitness functions
