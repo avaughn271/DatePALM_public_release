@@ -1,0 +1,3 @@
+sgrad_mle	sgrad_se	sgrad_z	delta_mle	delta_se	delta_z
+0.0684	0.0032	21.5444	0.0475	0.0040	11.7943
+0.0209	0.0028	7.5264	-1	-1	-1
